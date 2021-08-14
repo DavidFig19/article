@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\articles;
+use App\Models\Comment;
+
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\articles  $articles
+     * @param  \App\Models\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function show(articles $articles)
+    public function show(Comment $comment)
     {
         //
     }
@@ -52,10 +53,10 @@ class ArticlesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\articles  $articles
+     * @param  \App\Models\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(articles $articles)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -64,10 +65,10 @@ class ArticlesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\articles  $articles
+     * @param  \App\Models\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, articles $articles)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -75,10 +76,10 @@ class ArticlesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\articles  $articles
+     * @param  \App\Models\Comment  $Comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(articles $articles)
+    public function destroy(Comment $comment)
     {
         //
     }

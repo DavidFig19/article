@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\comments;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class CommentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\comments  $comments
+     * @param  \App\Models\Category  $Category
      * @return \Illuminate\Http\Response
      */
-    public function show(comments $comments)
+    public function show(Category $category)
     {
         //
     }
@@ -52,10 +52,10 @@ class CommentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\comments  $comments
+     * @param  \App\Models\Category  $Category
      * @return \Illuminate\Http\Response
      */
-    public function edit(comments $comments)
+    public function edit(Category $category)
     {
         //
     }
@@ -64,10 +64,10 @@ class CommentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\comments  $comments
+     * @param  \App\Models\Category  $Category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, comments $comments)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -75,10 +75,10 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\comments  $comments
+     * @param  \App\Models\Category  $Category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comments $comments)
+    public function destroy(Category $category)
     {
         //
     }
