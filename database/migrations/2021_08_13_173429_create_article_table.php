@@ -18,7 +18,7 @@ class CreateArticleTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('author');
-            $table->timestamp('public_at');
+            $table->timestamp('public_at')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
