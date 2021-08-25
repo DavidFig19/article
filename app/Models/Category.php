@@ -9,7 +9,7 @@ use PhpParser\Node\Expr\FuncCall;
 class Category extends Model
 {
     use HasFactory;
-
+    protected $fillable=['name'];
 
     //relacion uno  a muchos category a article
     public function articles(){
@@ -17,4 +17,5 @@ class Category extends Model
         return $this->hasMany('App\Models\Article');
 
     }
+    
 }
