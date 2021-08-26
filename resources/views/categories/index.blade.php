@@ -2,6 +2,7 @@
 
 @section('contenido')
 <div class="container__categories">
+
     <div>
 
         <form class="card shadow" id="categoryForm">
