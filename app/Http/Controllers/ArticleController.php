@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
-class ArticlesController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class ArticlesController extends Controller
     public function index()
     {
         //
+        return view('articles.index');
     }
 
     /**

@@ -32,40 +32,51 @@ getAllData();
 document.getElementById("categoryForm").addEventListener("submit", (e) => {
     let nombreCategoria = document.getElementById("nameCategory");
     let errorValidar = document.getElementById('error');
+
+   
     e.preventDefault();
+   if(nombreCategoria.value===''){
+    errorValidar.innerText = '*campo requerido*';
+   }else{
     axios({
-            method: 'post',
-            url: 'api/categories',
-            data: {
-                name: nombreCategoria.value
-            }
-        })
+        method: 'post',
+        url: 'api/categories',
+        data: {
+            name: nombreCategoria.value
+        }
+    })
 
-        .then(function(response) {
+    .then(function(response) {
 
 
-            console.log(response);
-            nombreCategoria.value = "";
-            alertify.success('Categoria agregada')
-            errorValidar.innerText = '';
-            getAllData();
-        })
-        .catch(function(err) {
+        console.log(response);
+        nombreCategoria.value = "";
+        alertify.success('Categoria agregada')
+        errorValidar.innerText = '';
+        getAllData();
+    })
+    .catch(function(err) {
 
-            console.log(err)
-            if (err.response.data.errors) {
-                // alertify.error(err.response.data.errors.name[0])
-                errorValidar.innerText = 'No puede estar vacio';
-            }
+        console.log(err)
+        // if (err.response.data.errors) {
+        //     // alertify.error(err.response.data.errors.name[0])
+        //     errorValidar.innerText = 'No puede estar vacio';
+        // }
 
-        });
+    });
+   }
 });
 
 
 //Delete
 document.getElementById("contentCategory").addEventListener("click", (e) => {
-    var btnDelete = e.target.parentNode;
-
+    let btnDelete = e.target.parentNode;
+    let btnClick = e.target;
+    
+    if(btnClick.value === undefined){
+      btnClick = e.target.parentNode;
+      
+    }
 
     if (btnDelete.id === "deleteRow") {
 
@@ -84,17 +95,74 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
 
 
     }
+
+
+
+
+    //en caso de no detecar el click realiza
+
+    if (btnClick.id === "deleteRow") {
+
+        alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
+
+            axios.delete(`api/categories/${btnDelete.value} `).then(() => {
+                getAllData();
+                alertify.success('Categoria Eliminada satisfactoriamente');
+            });
+
+
+        }, function() {
+            alertify.error('Acción cancelada')
+        });
+
+
+
+    }
+
+
+
+
 });
 
 //Edit
 
 document.getElementById("contentCategory").addEventListener("click", (e) => {
-    var btnEdit = e.target.parentNode;
-
+    let btnEdit = e.target.parentNode;
+    let btnClick = e.target;
+    
+    if(btnClick.value === undefined){
+      btnClick = e.target.parentNode;
+      
+    }
 
     if (btnEdit.id === "editRow") {
 
         axios.get(`api/categories/${btnEdit.value}/edit`)
+            .then(function(response) {
+                // handle success
+                console.log(response);
+                let inputId = document.getElementById('IDCategory');
+                let inputName = document.getElementById('nameEdit');
+                inputId.value = response.data.id;
+                inputName.value = response.data.name;
+            })
+            .catch(function(error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function() {
+                // always executed
+            });
+
+
+
+
+    }
+
+
+    if (btnClick.id === "editRow") {
+
+        axios.get(`api/categories/${btnClick.value}/edit`)
             .then(function(response) {
                 // handle success
                 console.log(response);

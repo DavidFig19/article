@@ -27,24 +27,25 @@
     <header class="container__header">
         <span>Diario local</span>
         <div>
-            <button><i class="fas fa-sign-out-alt"></i></button>
+            <button class="btn"><i class="fas fa-sign-out-alt"></i></button>
         </div>
     </header>
 
     <aside class="sideBar shadow">
         <ul class="sideBar__menu">
            
+            <li>
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="logo admin" class="sideBar__menu-logo">
-            
+            </li>            
           
             <li>
-                <a href="#"><i class="fad fa-ballot-check"></i> Categorias</a>
+                <a href="{{url('categories/')}}"><i class="fad fa-ballot-check"></i> Categorias</a>
             </li>
             <li>
                 <a href="#"><i class="fas fa-comments"></i> Comentarios</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-newspaper"></i> Publicaciones</a>
+                <a href="{{url('articles/')}}"><i class="fas fa-newspaper"></i> Publicaciones</a>
             </li>
         </ul>
 
@@ -58,7 +59,7 @@
         @yield('contenido')
 
         
-        
+       
 
     </main>
 

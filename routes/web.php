@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ArticleController;;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +20,18 @@ Route::get('/', function () {
 });
 
 
-Route::get('/categories', function () {
-    return view('categories.index');
+// Route::get('/categories', function () {
+//     return view('categories.index');
 
-});
+// });
+// Route::get('/articles', function () {
+//     return view('articles.index');
+
+// });
 
 
 Route::resource('categories', CategoryController::class);
-
+Route::resource('articles', ArticleController::class);
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

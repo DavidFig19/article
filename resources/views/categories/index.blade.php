@@ -1,20 +1,22 @@
 @extends('layout.layout')
 
 @section('contenido')
-<div class="container__categories" style="align-self: center;">
+<div class="container__categories">
     <div>
 
         <form class="card shadow" id="categoryForm">
-            <span>Formulario Categoria</span>
 
+            
+                <span style="text-align: center;">Formulario Categoria</span>
+            <hr>
 
             <label for="nameCategory">
                 Nombre:
             </label>
-            <input  class="form-input" type="text" name="nameCategory" id="nameCategory" placeholder="Nueva categoria" autofocus>
+            <input class="form-input" type="text" name="nameCategory" id="nameCategory" placeholder="Nueva categoria" autofocus>
 
             <label id="error" class="text__danger"></label>
-                <br>
+            <br>
             <button type="submit" class="btn btn-green btn-block" id="addNewCategory">Añadir categoria</button>
 
         </form>
@@ -23,7 +25,7 @@
 
 
 
-    <table class="table shadow" style="align-self: center;">
+    <table class="table shadow">
         <thead>
             <tr>
                 <th>ID</th>
@@ -45,8 +47,8 @@
             </div>
             <div class="modal_titulo">VENTANA MODAL</div>
             <form id="updateCategory" class="modal_mensaje">
-                <input type="text" name="IDCategory" id="IDCategory" placeholder="ID usuario" disabled>
-                <input type="text" name="nameEdit" id="nameEdit" placeholder="ID usuario">
+                <input class="form-input" type="text" name="IDCategory" id="IDCategory" placeholder="ID usuario" disabled>
+                <input class="form-input" type="text" name="nameEdit" id="nameEdit" placeholder="ID usuario">
                 <button class="btn btn-green" type="submit">ACEPTAR</button>
             </form>
 
