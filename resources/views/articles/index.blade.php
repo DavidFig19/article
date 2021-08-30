@@ -1,40 +1,74 @@
 @extends('layout.layout')
 
 @section('contenido')
-
-
 <div class="container__articles">
 
-<!--inicia formulario-->
-<form class="card shadow"  >
+    @if(Session::has('message'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.success("{{ session('message') }}");
+    </script>
+    @endif
 
 
-<input type="text" class="form-input" placeholder="ID del articulo" id="idArticle" name="idArticle" disabled>
-<label for="">Titulo:</label>
-<input type="text" class="form-input" placeholder="Titulo del articulo" id="nameArticle" name="nameArticle">
-<label for="">Autor:</label>
-<input type="text" class="form-input" placeholder="Autor del articulo" id="authorArticle" name="nameArticle">
-<label for="">Descripción:</label>
-<textarea name="" id="" cols="30" rows="10" class="form-input"></textarea>
-
-<button class="btn btn-green" type="submit" id="saveArticle">
-<i class="fas fa-save"></i>
-Guardar
-</button>
-<button class="btn" type="submit" id="deleteArticle" disabled="true">
-<i class="fas fa-trash"></i>
-Eliminar
-</button>
-<button class="btn" type="submit" id="updateArticle" disabled="true">
-<i class="fas fa-undo"></i>
-Actualizar
-</button>
-</form>
+    @if(Session::has('error'))
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true
+        }
+        toastr.error("{{ session('error') }}");
+    </script>
+    @endif
 
 
+    <div class="card">
+        <a class="btn btn-green" href="{{url('articles/create')}}">
+            Nueva publicacion
+        </a>
+    </div>
+    <br />
+    @foreach($articles as $article)
+    <div class="card shadow" style="margin-bottom: 20px;">
+        <label >
+        Titulo:
+        </label>
+        <h4>{{$article->name}}</h4>
+        <label>
+            Autor:
+        </label>
+        <span>{{$article->author}}</span>
+        <p>
+            {{$article->description}}
+        </p>
 
+       
+      <div style="width:100%; display:flex; ">
+      <a href="{{url ('/articles/'.$article->id.'/edit')}}" class="btn btn-orange"><i class="fas fa-edit"></i></a>
+        
+        
+        <form action="{{ url('/articles/'.$article->id)}}" method="POST">
+            @csrf
+            {{method_field('DELETE')}}
+            <button type="submit" class="btn btn-red""><i class="fas fa-trash"></i></button>
+        </form>
+       
+      </div>
+      
+    </div>
+
+    @endforeach
 
 
 </div>
+
+
+
+
+
+
 
 @endsection

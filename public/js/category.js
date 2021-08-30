@@ -158,7 +158,7 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
 
 
     }
-
+    
 
     if (btnClick.id === "editRow") {
 

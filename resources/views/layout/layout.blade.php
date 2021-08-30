@@ -7,6 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!--toasttr-->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+   
+
+
+
+
     <!--bootstwatch-->
     <!-- <link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.min.css"> -->
     <!-- Styles -->
@@ -33,11 +49,11 @@
 
     <aside class="sideBar shadow">
         <ul class="sideBar__menu">
-           
+
             <li>
-            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="logo admin" class="sideBar__menu-logo">
-            </li>            
-          
+                <img src="https://www.w3schools.com/w3images/avatar2.png" alt="logo admin" class="sideBar__menu-logo">
+            </li>
+
             <li>
                 <a href="{{url('categories/')}}"><i class="fad fa-ballot-check"></i> Categorias</a>
             </li>
@@ -50,34 +66,35 @@
         </ul>
 
     </aside>
-        
+
     <!--Aqui va el contenido-->
     <main class="container">
-        
 
-       
+
+
         @yield('contenido')
 
-        
-       
+
+
+
 
     </main>
 
     @yield('modal')
+
     <!-- <script data-main="{{asset('/js/main.js')}}" src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
+
+   
 
     <!--Bootstrap js-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-
-    @yield('script')
 
     <!--My Js-->
     <script src="{{asset('/js/main.js')}}"></script>
     <!-- JavaScript Alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-
+    @yield('script')
 
 </body>
 

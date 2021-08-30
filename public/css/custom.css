@@ -20,7 +20,6 @@ body {
 /*ESTILOS GLOBALES*/
 
 
-
 :root {
     --priamry-color: rgba(52, 52, 110, 1);
     --secondary-color: #ffffff;
@@ -28,6 +27,38 @@ body {
     --with-aside: 180px;
     --height-header: 60px;
 }
+
+
+
+/* The alert message box */
+.alert {
+    padding: 20px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 15px;
+    width: 90%;
+    position: absolute;
+  }
+  
+  /* The close button */
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+
+
+
 
 .shadow {
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
@@ -48,7 +79,9 @@ body {
 .btn-block {
     width: 95%;
     margin: 10px auto;
+     text-align: center;
 }
+
 .btn {
     text-decoration: none;
     border-radius: 3px;
@@ -103,6 +136,26 @@ body {
 .text__danger {
     color: red;
 }
+
+
+.input-inline{
+    position: relative;
+    /* display: flex;
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+    justify-content: center; */
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    min-width: 100%;
+    
+}
+
+.input-inline *{
+    width: 90%;
+    justify-self: center;
+    
+}
 /*fin estilos globales*/
 
 .sideBar {
@@ -112,7 +165,7 @@ body {
     min-height: 100%;
     position: fixed;
     width: var(--with-aside);
-    z-index: 10;
+    z-index: 9;
 }
 
 .sideBar__menu li {
@@ -151,7 +204,7 @@ body {
     align-items: center;
     position: fixed;
     top: 0;
-    z-index: 10;
+    z-index: 9;
     left: var(--with-aside);
     padding: 0 10px;
 }
@@ -168,23 +221,22 @@ body {
     min-width: auto;
     min-height: auto;
     background-color: #ffffff;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    align-items: center; */
+    align-items: center;
     padding: 20px;
+    
     
 }
 
 
-/* .card *{
-    display: block;
-    margin: 0 auto;
-} */
+.imgArticle{
+    max-width: 60%;
+    height: auto;
+    max-height: 200px;
+  
+}
 
-/* .card__category * {
-    width: 90%;
-    padding: 10px 0;
-} */
 
 .table{
     min-width:auto;
@@ -273,14 +325,20 @@ td {
 
 .container__articles{
     display: grid;
-   
+   width: 100%;
+   grid-template-columns: repeat(6,1fr);
+   margin-top: 20px;
     /*una columna con un minimo y un maximo*/
-    grid-template-columns: repeat(1, minmax(300px, 60%));
+    /* grid-template-columns: repeat(1, minmax(300px, 60%));
     gap: 10px;
-    padding: 25px 20px ;
+    padding: 25px 20px ; */
    
 }
 
+.container__articles .card{
+
+    grid-column: 2/6;
+}
 
 
 
@@ -340,6 +398,12 @@ td {
        margin: 0;
    }
 
+   .modal{
+       width: 70%;
+   }
+   .modal_titulo{
+       font-size: 20px;
+   }
 }
 
 

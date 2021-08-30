@@ -50,7 +50,7 @@
             <form id="updateCategory" class="modal_mensaje">
                 <input class="form-input" type="text" name="IDCategory" id="IDCategory" placeholder="ID usuario" disabled>
                 <input class="form-input" type="text" name="nameEdit" id="nameEdit" placeholder="ID usuario">
-                <button class="btn btn-green" type="submit">ACEPTAR</button>
+                <button class="btn btn-orange" type="submit"><i class="fas fa-undo"></i> Actualizar</button>
             </form>
 
         </div>

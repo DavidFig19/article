@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CategoryController;
-
+use App\Http\Controllers\API\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('categories', CategoryController::class);
-
+Route::resource('articles', ArticleController::class);
 
 Route::get('categorias',[CategoryController::class, 'getAllCat']);
+
+Route::get('articulos',[ArticleController::class, 'getAllArt']);
