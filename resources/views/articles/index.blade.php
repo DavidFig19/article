@@ -1,5 +1,7 @@
 @extends('layout.layout')
-
+@section('titulo')
+Articulos
+@stop
 @section('contenido')
 <div class="container__articles">
 
@@ -42,8 +44,7 @@
 
             <span>Autor: {{$article->author}}</span>
 
-           
-            <!-- <h5 name="{{$article->category_id}}" class="{{$article->category_id}}"></h5> -->
+
             <h5>Categoria: {{ $article->category->name }}</h5>
             <hr>
 
@@ -78,52 +79,7 @@
 
 
 </div>
-@section('script')
-<!-- Axios -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<!-- <script>
-    const getAllcategories = () => {
-        
 
-        axios.get("/api/categorias")
-            .then((response) => {
-
-
-                response.data.forEach(item => {
-
-
-                    
-                    //seleccionar todos los elemtos con el nombre de cada uno de los item
-                    let categoria = document.getElementsByName(`${item.id}`)
-                    
-                    //foreacha  ese array de etiquetas
-                    categoria.forEach(i => {
-                        //  console.log(i)
-                        
-                        if (  item.id==i.className) {
-                             i.innerText = `Categoria: ${item.name}`;
-                           
-                        }
-
-                    })
-
-
-
-
-
-
-
-
-
-                });
-
-
-            });
-    }
-
-    getAllcategories();
-</script> -->
-@stop
 
 
 

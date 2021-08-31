@@ -1,4 +1,7 @@
 @extends('layout.layout')
+@section('titulo')
+Crear categoria
+@stop
 @section('contenido')
 <div class="container__articles">
 
