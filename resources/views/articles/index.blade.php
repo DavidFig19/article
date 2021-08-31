@@ -43,7 +43,8 @@
             <span>Autor: {{$article->author}}</span>
 
            
-            <h5 name="{{$article->category_id}}" class="{{$article->category_id}}"></h5>
+            <!-- <h5 name="{{$article->category_id}}" class="{{$article->category_id}}"></h5> -->
+            <h5>Categoria: {{ $article->category->name }}</h5>
             <hr>
 
         </section>
@@ -80,7 +81,7 @@
 @section('script')
 <!-- Axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
+<!-- <script>
     const getAllcategories = () => {
         
 
@@ -121,7 +122,7 @@
     }
 
     getAllcategories();
-</script>
+</script> -->
 @stop
 
 
