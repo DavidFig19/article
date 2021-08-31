@@ -47,7 +47,7 @@
 @if(isset($article->image))
 <img src="{{asset('storage').'/'.$article->image}}" alt="imagen nota" id="preview" class="imgArticle">
 @else
-<img src="" alt="imagen nota" id="preview" class="imgArticle">
+<img src="https://cdn.pixabay.com/photo/2016/03/21/20/05/image-1271454_640.png" alt="imagen nota" id="preview" class="imgArticle">
 
 @endif
 <label>

@@ -3,7 +3,7 @@
 @section('contenido')
 <div class="container__articles">
 
-<form action="{{url('/articles/'.$article->id)}}" method="POST" enctype="multipart/form-data" class="card shadow">
+<form action="{{url('/articles/'.$article->id)}}" method="POST" enctype="multipart/form-data" class="card center shadow">
 @csrf
 {{method_field('PATCH')}}
 @include('articles.form',['modo'=>'Actualizar','btnmode'=>'btn btn-orange btn-block'])

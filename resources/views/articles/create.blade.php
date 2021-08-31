@@ -6,7 +6,7 @@
 
 
     <!--inicia formulario-->
-    <form  action="{{ url('/articles') }}" class="card shadow" method="POST" enctype="multipart/form-data">
+    <form  action="{{ url('/articles') }}" class="card center shadow" method="POST" enctype="multipart/form-data">
 
         @csrf
 

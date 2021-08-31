@@ -156,6 +156,14 @@ body {
     justify-self: center;
     
 }
+
+.text-truncate{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+}
 /*fin estilos globales*/
 
 .sideBar {
@@ -228,7 +236,15 @@ body {
     
     
 }
-
+.card-article{
+    min-width: auto;
+    min-height: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 70px 1fr 50px;
+    gap: 40px;
+}
 
 .imgArticle{
     max-width: 60%;
@@ -335,7 +351,7 @@ td {
    
 }
 
-.container__articles .card{
+.center{
 
     grid-column: 2/6;
 }
