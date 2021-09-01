@@ -12,8 +12,8 @@
 
 
   <!--bootstwatch-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.min.css">
   <!-- Styles -->
   <link href="{{ asset('css/public.css') }}" rel="stylesheet">
   <!--font awesome-->
@@ -111,7 +111,7 @@
           res.data.forEach(item => {
             content += `
          
-          <div class="nav-link" onclick="getOneCat(this.id)" value="changeCat" id="${item.id}" style="cursor:pointer">${item.name}</div>
+          <div class="nav-link" onclick="getOneCat(this.id)"  id="${item.id}" style="cursor:pointer">${item.name}</div>
   
           `;
           })
@@ -122,7 +122,48 @@
 
     getAllData();
 
-    function getOneCat(param) {
+
+    const allArticles = () => {
+
+      let parentCards = document.getElementById('contentArticle');
+      let content = "";
+      parentCards.innerHTML = "";
+      axios.get(`api/articulos`).then((res) => {
+
+        res.data.forEach(item => {
+          console.log(item.name)
+          content += `
+           
+         
+          <div class="col-sm-6 col-lg-4 col-xl-3 mb-2">
+            <div class="card">
+            <img src="storage/${item.image}" class="card-img-top" alt="imagen noticia" >
+              <div class="card-body">
+                <h5 class="card-title text-danger">${item.name}</h5>
+                <p>${item.category.name}</p>
+                <p class="card-text">
+                ${item.description}
+                </p>
+                
+              </div>
+              <a href="#" class="btn btn-secondary btn-block btn-edit">Go somewhere</a>
+            </div>
+          </div>
+
+
+            
+
+              `;
+        })
+        parentCards.innerHTML = content;
+
+      })
+
+    }
+
+    allArticles();
+
+    const getOneCat = (param) => {
 
       let parentCards = document.getElementById('contentArticle');
       let content = "";
@@ -132,17 +173,23 @@
         res.data.forEach(item => {
           console.log(item.name)
           content += `
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem;">
-        <img src="storage/${item.image}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">${item.name}</h5>
-          <p class="text-truncate">${item.description}</p>
-          <a href="" class="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>
+      
+          <div class="col-sm-6 col-lg-4 col-xl-3 mb-2">
+            <div class="card">
+            <img src="storage/${item.image}" class="card-img-top" alt="imagen noticia" >
+              <div class="card-body">
+                <h5 class="card-title text-danger">${item.name}</h5>
+                <p>${item.category.name}</p>
+                <p class="card-text">
+                ${item.description}
+                </p>
+                
+              </div>
+              <a href="#" class="btn btn-secondary btn-block btn-edit">Go somewhere</a>
+            </div>
+          </div>
 
-      </div>
+      
 
     `;
         })
@@ -150,9 +197,6 @@
 
       })
     }
-
-
-
   </script>
 
 </body>

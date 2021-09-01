@@ -38,10 +38,25 @@ background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox=
     color:#ffffff;
 }
 
-.text-truncate{
+.card-text{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     line-clamp: 4;
     overflow: hidden;
+}
+.card-img-top{
+
+    max-height: 150px;
+    min-height: 150px;
+    border-bottom: solid 3px #F0BD1E;
+}
+.card{
+    min-height: 410px;
+}
+
+.btn-edit{
+
+    width: 90%;
+    margin: 0 auto 10px auto;
 }
