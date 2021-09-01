@@ -24,4 +24,5 @@ Route::resource('articles', ArticleController::class);
 
 Route::get('categorias',[CategoryController::class, 'getAllCat']);
 
-Route::get('articulos',[ArticleController::class, 'getAllArt']);
+Route::get('articulos',[ArticleController::class, 'getAllArt'])->name('articulos.getAllArt');
+Route::get('articulos/{category}',[ArticleController::class,'getOneTypeArticle'])->name('articulos.getOneTypeArticle');

@@ -9,7 +9,7 @@
 
   <!--icono pestaña-->
   <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
-  
+
 
   <!--bootstwatch-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
@@ -26,46 +26,44 @@
 
 <body>
 
-<header class="imgHeader">
-    <h5 class="pt-2"  id="fechaLocal"></h5>
+  <header class="imgHeader">
+    <hp class="pt-2" id="fechaLocal"></hp>
     <hr>
     <h4 class="float-left">DiarioLocal.com.mx</h4>
-    
+
   </header>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky">
     <div class="container-fluid">
       <a class="navbar-brand text-warning" href="{{url('/')}}">
-      <img src="{{ asset('img/favicon.png') }}" alt="logo app" style="height: 40px; width:40px">
+        <img src="{{ asset('img/favicon.png') }}" alt="logo app" style="height: 40px; width:40px">
         Diario local
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
+        <div class="navbar-nav me-auto mb-2 mb-lg-0" id="catDinamic">
+
+
+
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
-          </li>
-        </ul>
-        
-          <div class="dropdown float-rigth mr-auto pr-5">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-       
+          </li> -->
+
+        </div>
+
+        <div class="dropdown float-rigth mr-auto pr-5">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </nav>
@@ -73,7 +71,10 @@
 
   <div class="container colorContent">
 
-    @yield('contenido')
+    <div class="row pt-5" id="contentArticle">
+
+    </div>
+
   </div>
 
 
@@ -90,11 +91,70 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
   <!--My Js-->
-  <script src="{{asset('/js/main.js')}}"></script>
+  <script src="{{asset('/js/hora.js')}}"></script>
   <!-- JavaScript Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   @yield('script')
+  <!-- Axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+  <script>
+    const getAllData = () => {
+      let lista = document.getElementById('catDinamic');
+      let content = '';
+      lista.innerHTML = '';
+      axios
+        .get("api/categorias")
+        .then((res) => {
+
+          res.data.forEach(item => {
+            content += `
+         
+          <div class="nav-link" onclick="getOneCat(this.id)" value="changeCat" id="${item.id}" style="cursor:pointer">${item.name}</div>
+  
+          `;
+          })
+
+          lista.innerHTML = content;
+        });
+    }
+
+    getAllData();
+
+    function getOneCat(param) {
+
+      let parentCards = document.getElementById('contentArticle');
+      let content = "";
+      parentCards.innerHTML = "";
+      axios.get(`api/articulos/${param}`).then((res) => {
+
+        res.data.forEach(item => {
+          console.log(item.name)
+          content += `
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+        <img src="storage/${item.image}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${item.name}</h5>
+          <p class="text-truncate">${item.description}</p>
+          <a href="" class="btn btn-primary">Go somewhere</a>
+        </div>
+        </div>
+
+      </div>
+
+    `;
+        })
+        parentCards.innerHTML = content;
+
+      })
+    }
+
+
+
+  </script>
+
 </body>
 
 </html>

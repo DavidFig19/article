@@ -21,7 +21,7 @@ class CreateArticleTable extends Migration
             $table->string('image');
             $table->timestamp('public_at')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

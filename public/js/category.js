@@ -72,17 +72,20 @@ document.getElementById("categoryForm").addEventListener("submit", (e) => {
 document.getElementById("contentCategory").addEventListener("click", (e) => {
     let btnDelete = e.target.parentNode;
     let btnClick = e.target;
-    
+    console.log(btnDelete.value)
     if(btnClick.value === undefined){
       btnClick = e.target.parentNode;
       
+      
     }
-
+    console.log(btnClick.value)
+   
     if (btnDelete.id === "deleteRow") {
-
+      
+       
         alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
 
-            axios.delete(`api/categories/${btnDelete.value} `).then(() => {
+            axios.delete(`api/categories/${btnDelete.value}`).then(() => {
                 getAllData();
                 alertify.success('Categoria Eliminada satisfactoriamente');
             });
@@ -97,15 +100,14 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
     }
 
 
-
-
     //en caso de no detecar el click realiza
 
     if (btnClick.id === "deleteRow") {
-
+      
+       
         alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
 
-            axios.delete(`api/categories/${btnDelete.value} `).then(() => {
+            axios.delete(`api/categories/${btnClick.value}`).then(() => {
                 getAllData();
                 alertify.success('Categoria Eliminada satisfactoriamente');
             });
@@ -129,12 +131,12 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
 document.getElementById("contentCategory").addEventListener("click", (e) => {
     let btnEdit = e.target.parentNode;
     let btnClick = e.target;
-    
+    console.log(btnEdit)
     if(btnClick.value === undefined){
       btnClick = e.target.parentNode;
       
     }
-
+    // console.log(btnClick)
     if (btnEdit.id === "editRow") {
 
         axios.get(`api/categories/${btnEdit.value}/edit`)
@@ -208,7 +210,7 @@ document.getElementById('updateCategory').addEventListener('submit', (e) => {
            document.getElementsByClassName("fondo_transparente")[0].style.display='none';
            alertify.success('Categoria Actualizada');
 
-            console.log(res);
+            // console.log(res);
 
            
         })

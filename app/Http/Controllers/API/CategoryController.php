@@ -78,12 +78,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return true;
+        
+        // Category::destroy($id);
+        // return true;
+
+        Category::find($id)->delete();
+        return 'OK';
     }
 
     public function getAllCat(){
         $category = Category::all();
         return $category;
     }
+
+
+    
 }
