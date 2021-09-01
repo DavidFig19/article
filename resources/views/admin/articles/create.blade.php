@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layouts.admin')
 @section('titulo')
 Crear categoria
 @stop
@@ -9,12 +9,12 @@ Crear categoria
 
 
     <!--inicia formulario-->
-    <form  action="{{ url('/articles') }}" class="card center shadow" method="POST" enctype="multipart/form-data">
+    <form  action="{{ route('publicaciones.index') }}" class="card center shadow" method="POST" enctype="multipart/form-data">
 
         @csrf
 
 
-        @include('articles.form',['modo'=>'Guardar','btnmode'=>'btn btn-green btn-block']);
+        @include('admin.articles.form',['modo'=>'Guardar','btnmode'=>'btn btn-green btn-block'])
 
 
     </form>

@@ -59,13 +59,13 @@
             </li>
 
             <li>
-                <a href="{{url('categories/')}}"><i class="fad fa-ballot-check"></i> Categorias</a>
+                <a href="{{route('categorias.index')}}"><i class="fad fa-ballot-check"></i> Categorias</a>
             </li>
             <li>
                 <a href="#"><i class="fas fa-comments"></i> Comentarios</a>
             </li>
             <li>
-                <a href="{{url('articles/')}}"><i class="fas fa-newspaper"></i> Publicaciones</a>
+                <a href="{{route('publicaciones.index')}}"><i class="fas fa-newspaper"></i> Publicaciones</a>
             </li>
         </ul>
 

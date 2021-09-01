@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layouts.admin')
 @section('titulo')
 Articulos
 @stop
@@ -28,7 +28,7 @@ Articulos
 
 
     <div class="card center">
-        <a class="btn btn-green" href="{{url('articles/create')}}">
+        <a class="btn btn-green" href="{{route('publicaciones.create')}}">
             Nueva publicacion
         </a>
     </div>
@@ -45,8 +45,15 @@ Articulos
             <span>Autor: {{$article->author}}</span>
 
 
+            @if(isset($article->category->name))
             <h5>Categoria: {{ $article->category->name }}</h5>
+            @else
+            <h1>sin categoria</h1>
+            @endif
             <hr>
+
+
+
 
         </section>
 
@@ -58,10 +65,10 @@ Articulos
 
 
         <section>
-            <a href="{{url ('/articles/'.$article->id.'/edit')}}" class="btn btn-orange"><i class="fas fa-edit"></i></a>
+            <a href="{{ route('publicaciones.edit',$article->id)}}" class="btn btn-orange"><i class="fas fa-edit"></i></a>
 
 
-            <form action="{{ url('/articles/'.$article->id)}}" method="POST" style="display: inline-block; ">
+            <form action="{{ route('publicaciones.destroy',$article->id)}}" method="POST" style="display: inline-block; ">
                 @csrf
                 {{method_field('DELETE')}}
                 <button type="submit" class="btn btn-red" style="min-height:46px;">

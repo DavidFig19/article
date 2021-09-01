@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('categories', CategoryController::class);
-Route::resource('articles', ArticleController::class);
+Route::resource('categorias', CategoryController::class);
+Route::resource('publicaciones', ArticleController::class);
 
-Route::get('categorias',[CategoryController::class, 'getAllCat']);
+Route::get('categorias',[CategoryController::class, 'getAllCat'])->name('categorias.getAllData');
 
-Route::get('articulos',[ArticleController::class, 'getAllArt'])->name('articulos.getAllArt');
-Route::get('articulos/{category}',[ArticleController::class,'getOneTypeArticle'])->name('articulos.getOneTypeArticle');
+Route::get('publicaciones',[ArticleController::class, 'getAllArt'])->name('articulos.getAllArt');
+Route::get('publicaciones/{category}',[ArticleController::class,'getOneTypeArticle'])->name('articulos.getOneTypeArticle');

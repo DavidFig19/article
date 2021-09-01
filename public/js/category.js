@@ -1,7 +1,7 @@
 const getAllData = () => {
-
+    
     axios
-        .get("api/categorias")
+        .get('/api/categorias')
         .then((res) => {
             let table = document.getElementById('contentCategory');
             table.innerHTML = "";
@@ -40,7 +40,7 @@ document.getElementById("categoryForm").addEventListener("submit", (e) => {
    }else{
     axios({
         method: 'post',
-        url: 'api/categories',
+        url: '/api/categorias',
         data: {
             name: nombreCategoria.value
         }
@@ -85,7 +85,7 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
        
         alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
 
-            axios.delete(`api/categories/${btnDelete.value}`).then(() => {
+            axios.delete(`api/categorias/${btnDelete.value}`).then(() => {
                 getAllData();
                 alertify.success('Categoria Eliminada satisfactoriamente');
             });
@@ -107,7 +107,7 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
        
         alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
 
-            axios.delete(`api/categories/${btnClick.value}`).then(() => {
+            axios.delete(`/api/categorias/${btnClick.value}`).then(() => {
                 getAllData();
                 alertify.success('Categoria Eliminada satisfactoriamente');
             });
@@ -139,7 +139,7 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
     // console.log(btnClick)
     if (btnEdit.id === "editRow") {
 
-        axios.get(`api/categories/${btnEdit.value}/edit`)
+        axios.get(`/api/categorias/${btnEdit.value}/edit`)
             .then(function(response) {
                 // handle success
                 console.log(response);
@@ -164,7 +164,7 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
 
     if (btnClick.id === "editRow") {
 
-        axios.get(`api/categories/${btnClick.value}/edit`)
+        axios.get(`/api/categorias/${btnClick.value}/edit`)
             .then(function(response) {
                 // handle success
                 console.log(response);
@@ -197,7 +197,7 @@ document.getElementById('updateCategory').addEventListener('submit', (e) => {
      
     axios({
             method: 'put',
-            url: `api/categories/${idCat.value}`,
+            url: `/api/categorias/${idCat.value}`,
             data: {
                 id:idCat.value,
                 name: nameCat.value
@@ -214,13 +214,5 @@ document.getElementById('updateCategory').addEventListener('submit', (e) => {
 
            
         })
-    // axios.put(path, data)
-    //     .then(function(res) {
-    //         getAllData();
-    //        //cerramos modal;
-    //        document.getElementsByClassName("fondo_transparente")[0].style.display='none';
-    //        alertify.success('Categoria Actualizada');
-
-    //         console.log(res);
-    //     })
+   
 })

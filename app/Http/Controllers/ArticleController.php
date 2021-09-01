@@ -17,7 +17,7 @@ class ArticleController extends Controller
     {
         //
         $datos['articles'] = Article::paginate(5);
-        return view('articles.index', $datos);
+        return view('admin.articles.index', $datos);
     }
 
     /**
@@ -28,7 +28,7 @@ class ArticleController extends Controller
     public function create()
     {
         //
-        return view('articles.create');
+        return view('admin.articles.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class ArticleController extends Controller
         Article::create($dataArticles);
 
         //return response()->json($dataArticles);
-        return redirect('articles')->with('message', 'Articulo añadido');
+        return redirect()->route('publicaciones.index')->with('message', 'Articulo añadido');
     }
 
     /**
@@ -87,7 +87,7 @@ class ArticleController extends Controller
     {
 
         $article = Article::findOrFail($id);
-        return view('articles.edit', compact('article'));
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
@@ -134,7 +134,7 @@ class ArticleController extends Controller
 
         $article = Article::findOrFail($id);
         //return view('empleado.edit', compact('empleado'));
-        return redirect('articles')->with('message', 'Articulo modificado :)');
+        return redirect()->route('publicaciones.index')->with('message', 'Articulo modificado :)');
     }
 
     /**
@@ -157,6 +157,6 @@ class ArticleController extends Controller
 
 
 
-        return redirect('articles')->with('error', 'Articulo eliminado');;
+        return redirect()->route('publicaciones.index')->with('error', 'Articulo eliminado');;
     }
 }

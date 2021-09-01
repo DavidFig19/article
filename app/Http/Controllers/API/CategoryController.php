@@ -86,7 +86,7 @@ class CategoryController extends Controller
         return 'OK';
     }
 
-    public function getAllCat(){
+    public function getAllCat(Request $request){
         $category = Category::all();
         return $category;
     }

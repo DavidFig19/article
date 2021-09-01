@@ -71,9 +71,7 @@
 
   <div class="container colorContent">
 
-    <div class="row pt-5" id="contentArticle">
-
-    </div>
+   @yield('contenido')
 
   </div>
 
@@ -105,7 +103,7 @@
       let content = '';
       lista.innerHTML = '';
       axios
-        .get("api/categorias")
+        .get("/api/categorias")
         .then((res) => {
 
           res.data.forEach(item => {
@@ -123,80 +121,7 @@
     getAllData();
 
 
-    const allArticles = () => {
-
-      let parentCards = document.getElementById('contentArticle');
-      let content = "";
-      parentCards.innerHTML = "";
-      axios.get(`api/articulos`).then((res) => {
-
-        res.data.forEach(item => {
-          console.log(item.name)
-          content += `
-           
-         
-          <div class="col-sm-6 col-lg-4 col-xl-3 mb-2">
-            <div class="card">
-            <img src="storage/${item.image}" class="card-img-top" alt="imagen noticia" >
-              <div class="card-body">
-                <h5 class="card-title text-danger">${item.name}</h5>
-                <p>${item.category.name}</p>
-                <p class="card-text">
-                ${item.description}
-                </p>
-                
-              </div>
-              <a href="#" class="btn btn-secondary btn-block btn-edit">Go somewhere</a>
-            </div>
-          </div>
-
-
-            
-
-              `;
-        })
-        parentCards.innerHTML = content;
-
-      })
-
-    }
-
-    allArticles();
-
-    const getOneCat = (param) => {
-
-      let parentCards = document.getElementById('contentArticle');
-      let content = "";
-      parentCards.innerHTML = "";
-      axios.get(`api/articulos/${param}`).then((res) => {
-
-        res.data.forEach(item => {
-          console.log(item.name)
-          content += `
-      
-          <div class="col-sm-6 col-lg-4 col-xl-3 mb-2">
-            <div class="card">
-            <img src="storage/${item.image}" class="card-img-top" alt="imagen noticia" >
-              <div class="card-body">
-                <h5 class="card-title text-danger">${item.name}</h5>
-                <p>${item.category.name}</p>
-                <p class="card-text">
-                ${item.description}
-                </p>
-                
-              </div>
-              <a href="#" class="btn btn-secondary btn-block btn-edit">Go somewhere</a>
-            </div>
-          </div>
-
-      
-
-    `;
-        })
-        parentCards.innerHTML = content;
-
-      })
-    }
+    
   </script>
 
 </body>

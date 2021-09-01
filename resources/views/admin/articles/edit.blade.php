@@ -1,18 +1,16 @@
-@extends('layout.layout')
+@extends('layouts.admin')
 @section('titulo')
 Editar categoria
 @stop
 @section('contenido')
 <div class="container__articles">
 
-<form action="{{url('/articles/'.$article->id)}}" method="POST" enctype="multipart/form-data" class="card center shadow">
+<form action="{{route('publicaciones.update',$article->id)}}" method="POST" enctype="multipart/form-data" class="card center shadow">
 @csrf
 {{method_field('PATCH')}}
-@include('articles.form',['modo'=>'Actualizar','btnmode'=>'btn btn-orange btn-block'])
+@include('admin.articles.form',['modo'=>'Actualizar','btnmode'=>'btn btn-orange btn-block'])
 </form>
 </div>
-
-
 @section('script')
 
 
