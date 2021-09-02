@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     /**
@@ -34,8 +34,11 @@ class CategoryController extends Controller
         $this->validate($request, $campos, $mensaje);
         $data = request()->all();
 
+        // $idParent=DB::table('categories')->insertGetId( $data);//trae el id del elemto isertado
         $datos=Category::create($data);
-        $idParent=$datos->id;
+        $idParent=$datos->id; //con este puedes scar mas propiedades del objeto
+        
+        
         Category::where('id', '=', $idParent)->update(['parent_category_id'=>$idParent]);
         
         return true;
