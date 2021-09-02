@@ -9,7 +9,7 @@ Crear categoria
 
 
     <!--inicia formulario-->
-    <form  action="{{ route('publicaciones.index') }}" class="card center shadow" method="POST" enctype="multipart/form-data">
+    <form  action="{{ route('publicaciones.index') }}" class="card_style center shadow" method="POST" enctype="multipart/form-data">
 
         @csrf
 

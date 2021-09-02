@@ -13,22 +13,15 @@
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
     <!--toasttr-->
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
-     alpha/css/bootstrap.css" rel="stylesheet">
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" 
-     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-	
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  
    
 
 
 
 
     <!--bootstwatch-->
-    <!-- <link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+
     <!-- Styles -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
@@ -39,6 +32,16 @@
     <!-- Default theme alertify-->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 </head>
 
@@ -72,7 +75,7 @@
     </aside>
 
     <!--Aqui va el contenido-->
-    <main class="container">
+    <main class="container_admin">
 
 
 

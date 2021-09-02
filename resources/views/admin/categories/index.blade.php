@@ -7,7 +7,7 @@ Categorias
 
     <div>
 
-        <form class="card shadow" id="categoryForm">
+        <form class="card_style shadow" id="categoryForm">
 
             
                 <span style="text-align: center;">Formulario Categoria</span>

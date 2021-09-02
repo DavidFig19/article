@@ -164,6 +164,21 @@ body {
     line-clamp: 4;
     overflow: hidden;
 }
+
+
+
+.nav-category{
+    grid-column: 1/-1;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    position: sticky;
+    top:var(--height-header);
+    z-index: 9;
+}
 /*fin estilos globales*/
 
 .sideBar {
@@ -194,7 +209,7 @@ body {
     margin: 10px auto;
     display: block;
 }
-.container {
+.container_admin {
     grid-area: contenido;
     width: 100%;
     position: relative;
@@ -221,11 +236,11 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
-    padding: 25px 20px ;
+    padding: 20px 30px ;
 }
 
 /*estilos categoria*/
-.card{
+.card_style{
     min-width: auto;
     min-height: auto;
     background-color: #ffffff;
@@ -420,20 +435,20 @@ td {
    .modal_titulo{
        font-size: 20px;
    }
+
+   .nav-category{
+    grid-column: 1/-1;
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+  
+    position: sticky;
+    top:120px;
+    z-index: 8;
+    
 }
 
 
-
-
-/* .boton {
-    background: white;
-    padding: 8px 30px;
-    color: crimson;
-    text-decoration: none;
-    border-radius: 25px;
-    border: 1px solid crimson;
 }
-.boton:hover {
-    background: crimson;
-    color: white;
-} */

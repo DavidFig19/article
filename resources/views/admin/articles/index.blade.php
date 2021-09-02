@@ -3,6 +3,7 @@
 Articulos
 @stop
 @section('contenido')
+
 <div class="container__articles">
 
     @if(Session::has('message'))
@@ -27,12 +28,15 @@ Articulos
     @endif
 
 
-    <div class="card center">
+    <div class="center">
         <a class="btn btn-green" href="{{route('publicaciones.create')}}">
             Nueva publicacion
         </a>
+        <br/>
+        <br/>
+        <br/>
     </div>
-    <br />
+   
     @foreach($articles as $article)
 
     <div class="card-article center shadow" style="margin-bottom: 20px;">
@@ -46,9 +50,9 @@ Articulos
 
 
             @if(isset($article->category->name))
-            <h5>Categoria: {{ $article->category->name }}</h5>
+            <p>Categoria: {{ $article->category->name }}</p>
             @else
-            <h1>sin categoria</h1>
+            <p>sin categoria</p>
             @endif
             <hr>
 
@@ -59,7 +63,6 @@ Articulos
 
         <p class="text-truncate">
             {{$article->description}}
-
         </p>
 
 
@@ -79,12 +82,19 @@ Articulos
 
         </section>
 
-
+       
     </div>
 
+   
+
     @endforeach
-
-
+    
+    <div class="center">
+    {!! $articles->links() !!}
+    </div>
+    
+    
+   
 </div>
 
 

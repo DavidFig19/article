@@ -24,8 +24,8 @@ class ArticleFactory extends Factory
         return [
             //
             'name' => $this->faker->title(),
-            'description' => $this->faker->text(),
-            'author' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(),
+            'author' => $this->faker->name(),
            
         ];
     }

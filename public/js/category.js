@@ -1,14 +1,11 @@
 const getAllData = () => {
-    
-    axios
-        .get('/api/categorias')
-        .then((res) => {
-            let table = document.getElementById('contentCategory');
-            table.innerHTML = "";
-            let content = '';
-            console.log(res.data);
-            res.data.forEach(item => {
-                content += `
+    axios.get("/api/categorias").then((res) => {
+        console.log(res.data);
+        let table = document.getElementById("contentCategory");
+        table.innerHTML = "";
+        let content = "";
+        res.data.forEach((item) => {
+            content += `
                 <tr>
                     <td>${item.id}</td>
                     <td>${item.name}</td>
@@ -20,110 +17,90 @@ const getAllData = () => {
                     </td>
                 </tr>
             `;
-            })
-
-            table.innerHTML = content;
         });
-}
+
+        table.innerHTML = content;
+    });
+};
 
 getAllData();
 
 // para agregar un nuevo elemento
 document.getElementById("categoryForm").addEventListener("submit", (e) => {
     let nombreCategoria = document.getElementById("nameCategory");
-    let errorValidar = document.getElementById('error');
+    let errorValidar = document.getElementById("error");
 
-   
     e.preventDefault();
-   if(nombreCategoria.value===''){
-    errorValidar.innerText = '*campo requerido*';
-   }else{
-    axios({
-        method: 'post',
-        url: '/api/categorias',
-        data: {
-            name: nombreCategoria.value
-        }
-    })
-
-    .then(function(response) {
-
-
-        console.log(response);
-        nombreCategoria.value = "";
-        alertify.success('Categoria agregada')
-        errorValidar.innerText = '';
-        getAllData();
-    })
-    .catch(function(err) {
-
-        console.log(err)
-        // if (err.response.data.errors) {
-        //     // alertify.error(err.response.data.errors.name[0])
-        //     errorValidar.innerText = 'No puede estar vacio';
-        // }
-
-    });
-   }
+    if (nombreCategoria.value === "") {
+        errorValidar.innerText = "*campo requerido*";
+    } else {
+        axios({
+            method: "post",
+            url: "/api/categorias",
+            data: {
+                name: nombreCategoria.value,
+            },
+        })
+            .then(function (response) {
+                console.log(response);
+                nombreCategoria.value = "";
+                alertify.success("Categoria agregada");
+                errorValidar.innerText = "";
+                getAllData();
+            })
+            .catch(function (err) {
+                console.log(err);
+                // if (err.response.data.errors) {
+                //     // alertify.error(err.response.data.errors.name[0])
+                //     errorValidar.innerText = 'No puede estar vacio';
+                // }
+            });
+    }
 });
-
 
 //Delete
 document.getElementById("contentCategory").addEventListener("click", (e) => {
     let btnDelete = e.target.parentNode;
     let btnClick = e.target;
-    console.log(btnDelete.value)
-    if(btnClick.value === undefined){
-      btnClick = e.target.parentNode;
-      
-      
+    console.log(btnDelete.value);
+    if (btnClick.value === undefined) {
+        btnClick = e.target.parentNode;
     }
-    console.log(btnClick.value)
-   
+    console.log(btnClick.value);
+
     if (btnDelete.id === "deleteRow") {
-      
-       
-        alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
-
-            axios.delete(`api/categorias/${btnDelete.value}`).then(() => {
-                getAllData();
-                alertify.success('Categoria Eliminada satisfactoriamente');
-            });
-
-
-        }, function() {
-            alertify.error('Acción cancelada')
-        });
-
-
-
+        alertify.confirm(
+            "¡Alerta!",
+            "Esta  apunto de eliminar una categoria",
+            function () {
+                axios.delete(`api/categorias/${btnDelete.value}`).then(() => {
+                    getAllData();
+                    alertify.success("Categoria Eliminada satisfactoriamente");
+                });
+            },
+            function () {
+                alertify.error("Acción cancelada");
+            }
+        );
     }
-
 
     //en caso de no detecar el click realiza
 
     if (btnClick.id === "deleteRow") {
-      
-       
-        alertify.confirm('¡Alerta!', 'Esta  apunto de eliminar una categoria', function() {
-
-            axios.delete(`/api/categorias/${btnClick.value}`).then(() => {
-                getAllData();
-                alertify.success('Categoria Eliminada satisfactoriamente');
-            });
-
-
-        }, function() {
-            alertify.error('Acción cancelada')
-        });
-
-
-
+        alertify.confirm(
+            "¡Alerta!",
+            "Esta  apunto de eliminar una categoria",
+            function () {
+                axios.delete(`/api/categorias/${btnClick.value}`).then(() => {
+                    getAllData();
+                    alertify.success("Categoria Eliminada satisfactoriamente");
+                });
+            },
+            function () {
+                alertify.error("Acción cancelada");
+            }
+        );
     }
-
-
-
-
 });
 
 //Edit
@@ -131,88 +108,72 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
 document.getElementById("contentCategory").addEventListener("click", (e) => {
     let btnEdit = e.target.parentNode;
     let btnClick = e.target;
-    console.log(btnEdit)
-    if(btnClick.value === undefined){
-      btnClick = e.target.parentNode;
-      
+    console.log(btnEdit);
+    if (btnClick.value === undefined) {
+        btnClick = e.target.parentNode;
     }
     // console.log(btnClick)
     if (btnEdit.id === "editRow") {
-
-        axios.get(`/api/categorias/${btnEdit.value}/edit`)
-            .then(function(response) {
+        axios
+            .get(`/api/categorias/${btnEdit.value}/edit`)
+            .then(function (response) {
                 // handle success
                 console.log(response);
-                let inputId = document.getElementById('IDCategory');
-                let inputName = document.getElementById('nameEdit');
+                let inputId = document.getElementById("IDCategory");
+                let inputName = document.getElementById("nameEdit");
                 inputId.value = response.data.id;
                 inputName.value = response.data.name;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-            .then(function() {
+            .then(function () {
                 // always executed
             });
-
-
-
-
     }
-    
 
     if (btnClick.id === "editRow") {
-
-        axios.get(`/api/categorias/${btnClick.value}/edit`)
-            .then(function(response) {
+        axios
+            .get(`/api/categorias/${btnClick.value}/edit`)
+            .then(function (response) {
                 // handle success
                 console.log(response);
-                let inputId = document.getElementById('IDCategory');
-                let inputName = document.getElementById('nameEdit');
+                let inputId = document.getElementById("IDCategory");
+                let inputName = document.getElementById("nameEdit");
                 inputId.value = response.data.id;
                 inputName.value = response.data.name;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-            .then(function() {
+            .then(function () {
                 // always executed
             });
-
-
-
-
     }
 });
 
-
-
 //update
-document.getElementById('updateCategory').addEventListener('submit', (e) => {
+document.getElementById("updateCategory").addEventListener("submit", (e) => {
     e.preventDefault();
-    let idCat =document.getElementById('IDCategory'); 
-    let nameCat=document.getElementById("nameEdit");
-     
+    let idCat = document.getElementById("IDCategory");
+    let nameCat = document.getElementById("nameEdit");
+
     axios({
-            method: 'put',
-            url: `/api/categorias/${idCat.value}`,
-            data: {
-                id:idCat.value,
-                name: nameCat.value
-            }
-        })
+        method: "put",
+        url: `/api/categorias/${idCat.value}`,
+        data: {
+            id: idCat.value,
+            name: nameCat.value,
+        },
+    }).then(function (res) {
+        getAllData();
+        //cerramos modal;
+        document.getElementsByClassName("fondo_transparente")[0].style.display =
+            "none";
+        alertify.success("Categoria Actualizada");
 
-        .then(function(res) {
-            getAllData();
-           //cerramos modal;
-           document.getElementsByClassName("fondo_transparente")[0].style.display='none';
-           alertify.success('Categoria Actualizada');
-
-            // console.log(res);
-
-           
-        })
-   
-})
+        // console.log(res);
+    });
+});

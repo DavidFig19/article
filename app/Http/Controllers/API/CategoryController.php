@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
-       
+
     }
 
     /**
@@ -27,14 +28,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $campos = ['name' => 'required|string|max:100'];
         $mensaje = ['required' => 'El :attribute es requerido'];
         $this->validate($request, $campos, $mensaje);
         $data = request()->all();
-        Category::create($data);
+
+        $datos=Category::create($data);
+        $idParent=$datos->id;
+        Category::where('id', '=', $idParent)->update(['parent_category_id'=>$idParent]);
+        
         return true;
     }
+
     public function edit($id)
     {
         return Category::find($id);
@@ -60,9 +66,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $datosCategoria=request()->except('id');
-       
-        Category::where('id','=',$id)->update($datosCategoria);
+        $datosCategoria = request()->except('id');
+
+        Category::where('id', '=', $id)->update($datosCategoria);
         return true;
         // $cat = Category::find($id);
         // $cat->name = $request->name;
@@ -78,7 +84,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        
+
         // Category::destroy($id);
         // return true;
 
@@ -86,11 +92,9 @@ class CategoryController extends Controller
         return 'OK';
     }
 
-    public function getAllCat(Request $request){
+    public function getAllCat(Request $request)
+    {
         $category = Category::all();
         return $category;
     }
-
-
-    
 }

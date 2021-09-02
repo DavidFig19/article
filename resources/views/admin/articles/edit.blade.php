@@ -5,7 +5,7 @@ Editar categoria
 @section('contenido')
 <div class="container__articles">
 
-<form action="{{route('publicaciones.update',$article->id)}}" method="POST" enctype="multipart/form-data" class="card center shadow">
+<form action="{{route('publicaciones.update',$article->id)}}" method="POST" enctype="multipart/form-data" class="card_style center shadow">
 @csrf
 {{method_field('PATCH')}}
 @include('admin.articles.form',['modo'=>'Actualizar','btnmode'=>'btn btn-orange btn-block'])
