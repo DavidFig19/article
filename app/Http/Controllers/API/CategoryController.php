@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class CategoryController extends Controller
 {
     /**
@@ -35,12 +36,17 @@ class CategoryController extends Controller
         $data = request()->all();
 
         // $idParent=DB::table('categories')->insertGetId( $data);//trae el id del elemto isertado
-        $datos=Category::create($data);
-        $idParent=$datos->id; //con este puedes scar mas propiedades del objeto
-        
-        
-        Category::where('id', '=', $idParent)->update(['parent_category_id'=>$idParent]);
-        
+        $datos = Category::create($data);
+        $id = $datos->id; //con este puedes scar mas propiedades del objeto
+        $idParent = $datos->parent_category_id;
+        if (!$idParent) {
+            Category::where('id', '=', $id)->update(['parent_category_id' => $id]); //le asignamos el id padree a la que sera la categoria padre
+
+        }
+
+
+
+
         return true;
     }
 
@@ -95,9 +101,36 @@ class CategoryController extends Controller
         return 'OK';
     }
 
+
+    /*  recuperar grupos de articles que tengan como parent el mismo id */
     public function getAllCat(Request $request)
     {
-        $category = Category::all();
+
+        //asi podemos mostrar todas las categorias padres en la tabla grupos
+        //ya que todos los grupos tiene igual el id y su parent_id
+        $category = Category::whereColumn('id', "=", 'parent_category_id')->get();
+
+
         return $category;
+    }
+
+
+
+    /*Metodo para recuperar solo las categorias del grupo articulos*/
+    public function getArticleCategories(Request $request)
+    {
+
+
+        // $categories=Category::where('name','articles')->first()->childCategory;
+
+        $category= Category::whereColumn('id', '!=', 'parent_category_id')->get();
+        // $categoryData['categories'] = Category::with(['categories'])->where('name', 'article')->get(); 
+      
+        //  $categoryName=Category::where('id',"=",$idParent)->get();
+        //  dd($categoryName);
+        //  $name=$categoryName->pluck('name');
+
+        // $newCat=$name->merge($categories);
+       return $category;
     }
 }

@@ -1,13 +1,17 @@
-const getAllData = () => {
+//Datos de los grupos/ctaegorias padre
+const getAllDataGroup = () => {
     axios.get("/api/categorias").then((res) => {
         console.log(res.data);
-        let table = document.getElementById("contentCategory");
+        let table = document.getElementById("contentParent");
+        let dropDown = document.getElementById("parent_category_id");
+        dropDown.innerHTML = "";
         table.innerHTML = "";
         let content = "";
+        let contentDrop = "";
         res.data.forEach((item) => {
             content += `
                 <tr>
-                    <td>${item.id}</td>
+    
                     <td>${item.name}</td>
                     <td>
                         <div class="btn-group">
@@ -20,33 +24,120 @@ const getAllData = () => {
         });
 
         table.innerHTML = content;
+
+        res.data.forEach((item) => {
+            contentDrop += `
+                <option value="${item.id}">${item.name}</option>
+
+            `;
+        });
+
+        dropDown.innerHTML = contentDrop;
     });
 };
 
-getAllData();
+getAllDataGroup();
 
-// para agregar un nuevo elemento
-document.getElementById("categoryForm").addEventListener("submit", (e) => {
-    let nombreCategoria = document.getElementById("nameCategory");
+//Datos de los articulos
+const getAllDataCategory = () => {
+    axios.get("/api/category/articles").then((res) => {
+        console.log(res.data);
+        let table = document.getElementById("contentCategory");
+
+        table.innerHTML = "";
+        let content = "";
+        let grupo = "";
+
+        res.data.forEach(item => {
+            content += `
+                    <tr>
+        
+                        <td>${item.name}</td>
+                        <td>${item.parent_category_id}</td>
+                        <td>
+                            <div class="btn-group">
+                            <button value="${item.id}" id="deleteRow" type="button" class="btn btn-red"><i class="fas fa-trash"></i></button>
+                            <button value="${item.id}" id="editRow"  type="button" class="btn btn-orange"><i class="fas fa-edit"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+        });
+
+        table.innerHTML = content;
+    });
+};
+
+getAllDataCategory();
+
+// Add new group
+document.getElementById("groupForm").addEventListener("submit", (e) => {
+    let nombreGrupo = document.getElementById("nameGroup");
     let errorValidar = document.getElementById("error");
 
     e.preventDefault();
-    if (nombreCategoria.value === "") {
+
+    if (nombreGrupo.value === "") {
         errorValidar.innerText = "*campo requerido*";
     } else {
         axios({
             method: "post",
             url: "/api/categorias",
             data: {
+                name: nombreGrupo.value,
+            },
+        })
+            .then(function (response) {
+                console.log(response);
+                nombreGrupo.value = "";
+                alertify.success("Grupo agregado");
+                errorValidar.innerText = "";
+                getAllDataGroup();
+                getAllDataCategory();
+
+                document.getElementById("closeGroup").click(); //presionar el botn de cerrado si se cumpleta el response
+            })
+            .catch(function (err) {
+                console.log(err);
+                // if (err.response.data.errors) {
+                //     // alertify.error(err.response.data.errors.name[0])
+                //     errorValidar.innerText = 'No puede estar vacio';
+                // }
+            });
+    }
+});
+
+//Add new category
+
+document.getElementById("groupCategory").addEventListener("submit", (e) => {
+    let nombreCategoria = document.getElementById("nameCategory");
+    let grupoCategoria = document.getElementById("parent_category_id");
+    let errorValidarName = document.getElementById("errorNameCategory");
+    let errorValidarGroup = document.getElementById("errorGroupCategory");
+
+    e.preventDefault();
+    console.log(nombreCategoria.value);
+
+    if (nombreCategoria.value === "") {
+        errorValidarName.innerText = "*campo requerido*";
+    } else {
+        axios({
+            method: "post",
+            url: "/api/categorias",
+            data: {
                 name: nombreCategoria.value,
+                parent_category_id: grupoCategoria.value,
             },
         })
             .then(function (response) {
                 console.log(response);
                 nombreCategoria.value = "";
-                alertify.success("Categoria agregada");
-                errorValidar.innerText = "";
-                getAllData();
+                errorValidarGroup.value = "";
+                alertify.success("Categoria Agregada");
+                errorValidarName.innerText = "";
+                getAllDataGroup();
+                getAllDataCategory();
+                document.getElementById("closeCategory").click(); //presionar el botn de cerrado si se cumpleta el response
             })
             .catch(function (err) {
                 console.log(err);
@@ -59,7 +150,7 @@ document.getElementById("categoryForm").addEventListener("submit", (e) => {
 });
 
 //Delete
-document.getElementById("contentCategory").addEventListener("click", (e) => {
+document.getElementById("contentParent").addEventListener("click", (e) => {
     let btnDelete = e.target.parentNode;
     let btnClick = e.target;
     console.log(btnDelete.value);
@@ -71,11 +162,11 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
     if (btnDelete.id === "deleteRow") {
         alertify.confirm(
             "¡Alerta!",
-            "Esta  apunto de eliminar una categoria",
+            "Esta  apunto de eliminar un grupo",
             function () {
                 axios.delete(`api/categorias/${btnDelete.value}`).then(() => {
                     getAllData();
-                    alertify.success("Categoria Eliminada satisfactoriamente");
+                    alertify.success("Grupo eliminado");
                 });
             },
             function () {
@@ -89,11 +180,11 @@ document.getElementById("contentCategory").addEventListener("click", (e) => {
     if (btnClick.id === "deleteRow") {
         alertify.confirm(
             "¡Alerta!",
-            "Esta  apunto de eliminar una categoria",
+            "Esta  apunto de eliminar un grupo",
             function () {
                 axios.delete(`/api/categorias/${btnClick.value}`).then(() => {
                     getAllData();
-                    alertify.success("Categoria Eliminada satisfactoriamente");
+                    alertify.success("Grupo eliminado");
                 });
             },
             function () {

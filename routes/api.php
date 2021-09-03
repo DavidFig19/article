@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ArticleController;
+use App\Models\Category;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('categorias', CategoryController::class);
 Route::resource('publicaciones', ArticleController::class);
 
-Route::get('categorias',[CategoryController::class, 'getAllCat'])->name('categorias.getAllData');
+Route::get('categorias',[CategoryController::class, 'getAllCat'])->name('categorias.getAllCat');
 
 Route::get('publicaciones',[ArticleController::class, 'getAllArt'])->name('articulos.getAllArt');
 Route::get('publicaciones/{category}',[ArticleController::class,'getOneTypeArticle'])->name('articulos.getOneTypeArticle');
+
+
+/*  ruta para recuperar solo las categorias hijas de articulo o publicacion */
+Route::get('category/articles',[CategoryController::class,'getArticleCategories'])->name('articulos.getArticleCategory');

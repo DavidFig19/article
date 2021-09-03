@@ -30,34 +30,6 @@ body {
 
 
 
-/* The alert message box */
-.alert {
-    padding: 20px;
-    background-color: #f44336; /* Red */
-    color: white;
-    margin-bottom: 15px;
-    width: 90%;
-    position: absolute;
-  }
-  
-  /* The close button */
-  .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  /* When moving the mouse over the close button */
-  .closebtn:hover {
-    color: black;
-  }
-
-
 
 
 .shadow {
@@ -293,7 +265,7 @@ td {
 }
 
 /*modal*/
-.fondo_transparente {
+/* .fondo_transparente {
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.226);
@@ -349,7 +321,7 @@ td {
     padding-top: 20px;
     display: flex;
     justify-content: space-evenly;
-}
+} */
 
 
 /*estilos articles*/
@@ -429,7 +401,7 @@ td {
        margin: 0;
    }
 
-   .modal{
+   /* .modal{
        width: 70%;
    }
    .modal_titulo{
@@ -448,7 +420,7 @@ td {
     top:120px;
     z-index: 8;
     
-}
+} */
 
 
 }
