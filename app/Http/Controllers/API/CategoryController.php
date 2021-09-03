@@ -37,12 +37,12 @@ class CategoryController extends Controller
 
         // $idParent=DB::table('categories')->insertGetId( $data);//trae el id del elemto isertado
         $datos = Category::create($data);
-        $id = $datos->id; //con este puedes scar mas propiedades del objeto
-        $idParent = $datos->parent_category_id;
-        if (!$idParent) {
-            Category::where('id', '=', $id)->update(['parent_category_id' => $id]); //le asignamos el id padree a la que sera la categoria padre
+        // $id = $datos->id; //con este puedes scar mas propiedades del objeto
+        // $idParent = $datos->parent_category_id;
+        // if (!$idParent) {
+        //     Category::where('id', '=', $id)->update(['parent_category_id' => $id]); //le asignamos el id padree a la que sera la categoria padre
 
-        }
+        // }
 
 
 
@@ -106,12 +106,12 @@ class CategoryController extends Controller
     public function getAllCat(Request $request)
     {
 
-        //asi podemos mostrar todas las categorias padres en la tabla grupos
-        //ya que todos los grupos tiene igual el id y su parent_id
-        $category = Category::whereColumn('id', "=", 'parent_category_id')->get();
 
+        $categories = Category::whereNull('parent_category_id')
+            ->with('childrenCategory')
+            ->get();
 
-        return $category;
+        return compact('categories');
     }
 
 
@@ -121,16 +121,11 @@ class CategoryController extends Controller
     {
 
 
-        // $categories=Category::where('name','articles')->first()->childCategory;
+        /* aqui se traen los que no son nullos entonces simpre traera a los hijos por que se guardan con categoria */
+        $categories = Category::whereNotNull('parent_category_id')
+            ->with('childrenCategory')
+            ->get();
 
-        $category= Category::whereColumn('id', '!=', 'parent_category_id')->get();
-        // $categoryData['categories'] = Category::with(['categories'])->where('name', 'article')->get(); 
-      
-        //  $categoryName=Category::where('id',"=",$idParent)->get();
-        //  dd($categoryName);
-        //  $name=$categoryName->pluck('name');
-
-        // $newCat=$name->merge($categories);
-       return $category;
+        return compact('categories');
     }
 }

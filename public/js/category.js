@@ -8,8 +8,10 @@ const getAllDataGroup = () => {
         table.innerHTML = "";
         let content = "";
         let contentDrop = "";
-        res.data.forEach((item) => {
-            content += `
+        for (elemento in res.data) {
+            // console.log(`${elemento}: ${res.data[elemento]}`);
+            res.data[elemento].forEach((item) => {
+                content += `
                 <tr>
     
                     <td>${item.name}</td>
@@ -21,16 +23,19 @@ const getAllDataGroup = () => {
                     </td>
                 </tr>
             `;
-        });
+            });
+        }
 
         table.innerHTML = content;
 
-        res.data.forEach((item) => {
-            contentDrop += `
+        for (elemento in res.data) {
+            res.data[elemento].forEach((item) => {
+                contentDrop += `
                 <option value="${item.id}">${item.name}</option>
 
             `;
-        });
+            });
+        }
 
         dropDown.innerHTML = contentDrop;
     });
@@ -40,29 +45,41 @@ getAllDataGroup();
 
 //Datos de los articulos
 const getAllDataCategory = () => {
-    axios.get("/api/category/articles").then((res) => {
+    axios.get("/api/categorias").then((res) => {
         console.log(res.data);
         let table = document.getElementById("contentCategory");
 
         table.innerHTML = "";
         let content = "";
         let grupo = "";
-
-        res.data.forEach(item => {
-            content += `
+        for (elemento in res.data) {
+            res.data[elemento].forEach((item) => {
+                //aparte de hacerle foreach al elemto objeto cada uno
+                //tiene otro objeto hijo adentro
+                //se mapea ese para acceder a las propiedades del hijo y solo
+                //asignamos el nombre del padre
+                item.children_category.forEach((i) => {
+                    content += `
                     <tr>
         
-                        <td>${item.name}</td>
-                        <td>${item.parent_category_id}</td>
+                        <td>${i.name}</td>
+                        <td>
+                        <span class="badge bg-info text-dark">
+                        ${item.name}
+                        </span>
+                        
+                        </td>
                         <td>
                             <div class="btn-group">
-                            <button value="${item.id}" id="deleteRow" type="button" class="btn btn-red"><i class="fas fa-trash"></i></button>
-                            <button value="${item.id}" id="editRow"  type="button" class="btn btn-orange"><i class="fas fa-edit"></i></button>
+                            <button value="${i.id}" id="deleteRow" type="button" class="btn btn-red"><i class="fas fa-trash"></i></button>
+                            <button value="${i.id}" id="editRow"  type="button" class="btn btn-orange"><i class="fas fa-edit"></i></button>
                             </div>
                         </td>
                     </tr>
                 `;
-        });
+                });
+            });
+        }
 
         table.innerHTML = content;
     });
@@ -165,7 +182,8 @@ document.getElementById("contentParent").addEventListener("click", (e) => {
             "Esta  apunto de eliminar un grupo",
             function () {
                 axios.delete(`api/categorias/${btnDelete.value}`).then(() => {
-                    getAllData();
+                    getAllDataCategory();
+                    getAllDataGroup();
                     alertify.success("Grupo eliminado");
                 });
             },
@@ -183,7 +201,8 @@ document.getElementById("contentParent").addEventListener("click", (e) => {
             "Esta  apunto de eliminar un grupo",
             function () {
                 axios.delete(`/api/categorias/${btnClick.value}`).then(() => {
-                    getAllData();
+                    getAllDataCategory();
+                    getAllDataGroup();
                     alertify.success("Grupo eliminado");
                 });
             },
