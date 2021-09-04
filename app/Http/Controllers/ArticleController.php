@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $datos['articles'] = Article::paginate(5);
+        $datos['articles'] = Article::paginate(12);
         return view('admin.articles.index', $datos);
     }
 
@@ -43,14 +44,14 @@ class ArticleController extends Controller
             'name' => 'required|string|max:100',
             'description' => 'required|string',
             'author' => 'required|string',
-            'image' => 'required'
+            
         ];
 
         $mensaje = [
             'name.required' => 'el Titulo es requerido',
             'description.required' => 'La Descripción es requerida',
             'author.required' => 'el Autor es requerido',
-            'image.required' => 'La Foto es requerida'
+            
         ];
 
         $this->validate($request, $campos, $mensaje);
@@ -151,10 +152,13 @@ class ArticleController extends Controller
         if (Storage::delete('public/' . $article->image)) {
 
             Article::destroy($id);
+        }else{
+            Article::destroy($id);
         }
 
 
 
+      
 
 
         return redirect()->route('publicaciones.index')->with('error', 'Articulo eliminado');;

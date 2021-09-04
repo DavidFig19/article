@@ -6,7 +6,7 @@ Categorias
 <div class="container__categories">
 
     <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGruop">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalGruop" id="openModalGroup">
             <i class="fas fa-plus-circle"></i> Grupo
         </button>
         <br />
@@ -61,17 +61,44 @@ Categorias
                 </div>
                 <div class="modal-body">
                     <form class="card_style" id="groupForm">
-
+                        
+                        <div class="form-group">
                         <label for="nameCategory">
                             Nombre:
                         </label>
                         <input class="form-input" type="text" name="nameGroup" id="nameGroup" placeholder="Nuevo grupo" autofocus>
+                        </div>
 
-                        <label id="error" class="text__danger"></label>
+                        <small id="error" class="text__danger"></small>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-red" data-bs-dismiss="modal"><i class="fas fa-minus-circle"></i> cancelar</button>
                             <button type="submit" class="btn btn-green" id="addNewGroup"><i class="fas fa-save"></i> Guardar</button>
+
+                        </div>
+                    </form>
+
+
+
+                    <!--form actualizar-->
+                    <form class="card_style" id="groupFormUpdate" style="display: none;">
+                        <div class="form-group">
+                          <label for="">ID:</label>
+                          <input type="text" name="idGroupUpdate" id="idGroupUpdate" class="form-input" placeholder="ID" disabled> 
+                          
+                        </div>
+                        <div class="form-group">
+                        <label for="nameCategory">
+                            Nombre:
+                        </label>
+                        <input class="form-input" type="text" name="nameGroupUpdate" id="nameGroupUpdate" placeholder="Nuevo grupo" autofocus>
+                        </div>
+
+                        <small id="errorGroupUpdate" class="text__danger"></small>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-red" data-bs-dismiss="modal"><i class="fas fa-minus-circle"></i> cancelar</button>
+                            <button type="submit" class="btn btn-orange" id="addNewGroup"><i class="fas fa-undo"></i> Actualizar</button>
 
                         </div>
                     </form>
@@ -101,7 +128,7 @@ Categorias
                         <br />
                         <label for="idcategory">Grupo:
                             <select name="parent_category_id" id="parent_category_id" class="form-input">
-                                
+                                <!--generado con js-->
                             </select>
                         </label>
                         <span id="errorGroupCategory" class="text__danger"></span>

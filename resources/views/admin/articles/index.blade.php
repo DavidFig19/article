@@ -3,8 +3,19 @@
 Articulos
 @stop
 @section('contenido')
+<nav class="navbar  navbar-light bg-light">
+    <div class="container-fluid">
+        {!! $articles->links() !!}
 
-<div class="container__articles">
+        <a class="btn btn-green" href="{{route('publicaciones.create')}}">
+            <i class="fas fa-plus-circle"></i> publicacion
+        </a>
+
+    </div>
+</nav>
+<br />
+<br />
+<div class="container">
 
     @if(Session::has('message'))
     <script>
@@ -28,73 +39,58 @@ Articulos
     @endif
 
 
-    <div class="center">
-        <a class="btn btn-green" href="{{route('publicaciones.create')}}">
-            Nueva publicacion
-        </a>
-        <br/>
-        <br/>
-        <br/>
-    </div>
-   
-    @foreach($articles as $article)
+    <div class="row">
+        @foreach($articles as $article)
 
-    <div class="card-article center shadow" style="margin-bottom: 20px;">
-        <section>
-
-            <h3>Titulo: {{$article->name}}</h3>
+        <div class="col-md-6 col-sm-12 col-lg-4">
 
 
+            <div class="card">
 
-            <span>Autor: {{$article->author}}</span>
+                <div class="card-body">
+                    <h5 class="card-title">Titulo: {{$article->name}}</h5>
+                    <span>Autor: {{$article->author}}</span>
 
-
-            @if(isset($article->category->name))
-            <p>Categoria: {{ $article->category->name }}</p>
-            @else
-            <p>sin categoria</p>
-            @endif
-            <hr>
-
-
-
-
-        </section>
-
-        <p class="text-truncate">
-            {{$article->description}}
-        </p>
+                    @if(isset($article->category->name))
+                    <p>Categoria: {{ $article->category->name }}</p>
+                    @else
+                    <p class="text__danger">sin categoria</p>
+                    @endif
+                    <hr>
+                    <p class="card-text">
+                        {{$article->description}}
+                    </p>
+                    <a href="{{ route('publicaciones.edit',$article->id)}}" class="btn btn-orange"><i class="fas fa-edit"></i></a>
 
 
+                    <form action="{{ route('publicaciones.destroy',$article->id)}}" method="POST" style="display: inline-block; " class="formulario">
+                        @csrf
+                        {{method_field('DELETE')}}
+                        <button type="submit" class="btn btn-red" style="min-height:46px;">
+                            <i class=" fas fa-trash"></i>
+                        </button>
 
-        <section>
-            <a href="{{ route('publicaciones.edit',$article->id)}}" class="btn btn-orange"><i class="fas fa-edit"></i></a>
+                    </form>
+                </div>
+            </div>
+            <br/>
+          
 
 
-            <form action="{{ route('publicaciones.destroy',$article->id)}}" method="POST" style="display: inline-block; ">
-                @csrf
-                {{method_field('DELETE')}}
-                <button type="submit" class="btn btn-red" style="min-height:46px;">
-                    <i class=" fas fa-trash"></i>
-                </button>
+        </div>
+        @endforeach
 
-            </form>
 
-        </section>
-
-       
     </div>
 
-   
 
-    @endforeach
-    
-    <div class="center">
-    {!! $articles->links() !!}
-    </div>
-    
-    
-   
+
+
+
+
+
+
+
 </div>
 
 

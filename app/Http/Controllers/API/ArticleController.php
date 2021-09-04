@@ -65,6 +65,7 @@ class ArticleController extends Controller
 
     public function getAllArt(){
         $article = Article::with(['category'])->get();
+     
         return $article;
     }
 
