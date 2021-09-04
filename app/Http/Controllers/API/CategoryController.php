@@ -119,7 +119,7 @@ class CategoryController extends Controller
     /*Metodo para recuperar solo las categorias del grupo articulos*/
     public function getArticleCategories(Request $request)
     {
-        
+
 
         /* aqui se traen los que no son nullos entonces simpre traera a los hijos por que se guardan con categoria */
         $categories = Category::whereNotNull('parent_category_id')
@@ -128,4 +128,18 @@ class CategoryController extends Controller
 
         return compact('categories');
     }
+
+
+
+
+    public function getOnetypeCategory($id)
+    {
+
+        $data = Category::where('parent_category_id', $id)->get();
+
+        return $data;
+    }
+
+
+    
 }

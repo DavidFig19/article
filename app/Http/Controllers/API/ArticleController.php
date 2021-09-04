@@ -63,18 +63,16 @@ class ArticleController extends Controller
         //
     }
 
-    public function getAllArt(){
+    public function getAllArt()
+    {
         $article = Article::with(['category'])->get();
-     
         return $article;
     }
 
-    public function getOneTypeArticle($id){
+    public function getOneTypeArticle($id)
+    {
 
-        $article = Article::with(['category'])->where('category_id','=',$id)->get();
+        $article = Article::with(['category'])->where('category_id', '=', $id)->get();
         return $article;
-        
     }
-
-
 }

@@ -40,6 +40,7 @@ Articulos
 
 
     <div class="row">
+        @if(count($articles) > 0)
         @foreach($articles as $article)
 
         <div class="col-md-6 col-sm-12 col-lg-4">
@@ -73,12 +74,16 @@ Articulos
                     </form>
                 </div>
             </div>
-            <br/>
-          
+            <br />
+
 
 
         </div>
         @endforeach
+
+        @else
+        <h1 class="text-center">Sin Artículos...</h1>
+        @endif
 
 
     </div>

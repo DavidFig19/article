@@ -25,7 +25,7 @@ const getAllcategories = () => {
     let dropDown=document.getElementById('idCategory');
     let content='';
     dropDown.innerHTML='';
-    axios.get("/api/categorias")
+    axios.get('/api/categorias')
         .then((response) => {
             // console.log(response.data);
            

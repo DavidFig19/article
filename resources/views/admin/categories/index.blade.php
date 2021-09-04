@@ -3,6 +3,7 @@
 Categorias
 @stop
 @section('contenido')
+ 
 <div class="container__categories">
 
     <div>
@@ -11,7 +12,7 @@ Categorias
         </button>
         <br />
         <br />
-        <table class="table shadow">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -23,6 +24,7 @@ Categorias
 
             </tbody>
         </table>
+       
     </div>
 
 
@@ -34,7 +36,7 @@ Categorias
         </button>
         <br />
         <br />
-        <table class="table shadow">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -47,6 +49,7 @@ Categorias
 
             </tbody>
         </table>
+        <div id="pagination-container" ></div>
     </div>
     @section('modal')
 
@@ -161,7 +164,7 @@ Categorias
                         <br />
                         <div class="modal-footer">
                             <button type="button" class="btn btn-red" data-bs-dismiss="modal"><i class="fas fa-minus-circle"></i> cancelar</button>
-                            <button type="submit" class="btn btn-orange" id="addNewCategory"><i class="fas fa-undo"></i> Actualizar</button>
+                            <button type="submit" class="btn btn-orange" id="addNewCategory"><i class="fas fa-undo" class="paginationjs-theme-blue"></i> Actualizar</button>
 
                         </div>
                     </form>
@@ -176,10 +179,12 @@ Categorias
     @stop
 
 </div>
-
-
-
+<link href="{{ asset('css/pagination.css') }}" rel="stylesheet">
 @section('script')
+<!--jquery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
+
 <!-- Axios -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="{{asset('/js/category.js')}}"></script>
