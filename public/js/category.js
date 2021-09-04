@@ -7,8 +7,55 @@ document.getElementById("openModalGroup").addEventListener("click", () => {
     let form2 = document.getElementById("groupFormUpdate");
     form.style.display = "block";
     form2.style.display = "none";
+
+    
    
 });
+
+document.getElementById('openModalCategory').addEventListener('click',()=>{
+    let inputName=document.getElementById('nameCategory');
+    inputName.value="";
+    let formCatagory = document.getElementById("formCategory");
+    let formCategoryUpdate = document.getElementById("formCategoryUpdate");
+    formCatagory.style.display = "block";
+    formCategoryUpdate.style.display = "none";
+
+});
+
+
+
+//validar al cerrar modales
+document.getElementById('cancelGroup').addEventListener('click',()=>{
+     document.getElementById("error").innerText="";
+     document.getElementById('nameGroup').value="";
+    
+
+})
+document.getElementById('closeGroup').addEventListener('click',()=>{
+    document.getElementById("error").innerText="";
+    document.getElementById('nameGroup').value="";
+})
+
+
+
+document.getElementById('closeCategory').addEventListener('click',()=>{
+    document.getElementById("errorNameCategory").innerText="";
+    document.getElementById('nameCategory').value="";
+})
+
+
+document.getElementById('cancelCategory').addEventListener('click',()=>{
+    document.getElementById("errorNameCategory").innerText="";
+    document.getElementById('nameCategory').value="";
+})
+
+
+
+
+
+
+
+
 
 //Datos de los grupos/categorias padre
 const getAllDataGroup = () => {
@@ -16,6 +63,9 @@ const getAllDataGroup = () => {
         console.log(res.data);
         let table = document.getElementById("contentParent");
         let dropDown = document.getElementById("parent_category_id");
+        //para el drop de actualizar
+        let dropDownUpdate=document.getElementById('parent_category_id_update');
+        dropDownUpdate.innerHTML="";
         dropDown.innerHTML = "";
         table.innerHTML = "";
         let content = "";
@@ -50,12 +100,14 @@ const getAllDataGroup = () => {
         }
 
         dropDown.innerHTML = contentDrop;
+        dropDownUpdate.innerHTML=contentDrop;
+       
     });
 };
 
 getAllDataGroup();
 
-//Datos de los articulos
+//Datos de las categorias hijas
 const getAllDataCategory = () => {
     axios.get("/api/categorias").then((res) => {
         console.log(res.data);
@@ -84,7 +136,7 @@ const getAllDataCategory = () => {
                         <td>
                             <div class="btn-group">
                             <button value="${i.id}" id="deleteCat" type="button" class="btn btn-red"><i class="fas fa-trash"></i></button>
-                            <button value="${i.id}" id="editCat"  type="button" class="btn btn-orange"><i class="fas fa-edit"></i></button>
+                            <button value="${i.id}" id="editCat"  type="button" class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#modalCategory"><i class="fas fa-edit"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -123,7 +175,7 @@ document.getElementById("groupForm").addEventListener("submit", (e) => {
                 errorValidar.innerText = "";
                 getAllDataGroup();
                 getAllDataCategory();
-
+                errorValidar.innerText = "";
                 document.getElementById("closeGroup").click(); //presionar el botn de cerrado si se cumpleta el response
             })
             .catch(function (err) {
@@ -138,7 +190,7 @@ document.getElementById("groupForm").addEventListener("submit", (e) => {
 
 //Add new category
 
-document.getElementById("groupCategory").addEventListener("submit", (e) => {
+document.getElementById("formCategory").addEventListener("submit", (e) => {
     let nombreCategoria = document.getElementById("nameCategory");
     let grupoCategoria = document.getElementById("parent_category_id");
     let errorValidarName = document.getElementById("errorNameCategory");
@@ -166,6 +218,7 @@ document.getElementById("groupCategory").addEventListener("submit", (e) => {
                 errorValidarName.innerText = "";
                 getAllDataGroup();
                 getAllDataCategory();
+                errorValidarName.innerText = "";
                 document.getElementById("closeCategory").click(); //presionar el botn de cerrado si se cumpleta el response
             })
             .catch(function (err) {
@@ -331,13 +384,112 @@ document.getElementById("contentParent").addEventListener("click", (e) => {
     }
 });
 
-//update
+//update del padre o grupo
 document.getElementById("groupFormUpdate").addEventListener("submit", (e) => {
     e.preventDefault();
-    let idCat=document.getElementById('idGroupUpdate');
-    let nameCat = document.getElementById("nameGroupUpdate");
+    let idGroup=document.getElementById('idGroupUpdate');
+    let nameGroup = document.getElementById("nameGroupUpdate");
+    let validadador=document.getElementById('errorGroupUpdate');
+    if(nameGroup.value===""){
+        validadador.innerText="*Camporequerido*";
+    }else{
+        axios({
+            method: "put",
+            url: `/api/categorias/${idGroup.value}`,
+            data: {
+                
+                name: nameGroup.value,
+            },
+        }).then(function (res) {
+            getAllDataGroup();
+            getAllDataCategory();
+            //cerramos modal;
+            validadador.innerText="";
+            alertify.success("Grupo Actualizado");
+            document.getElementById("closeGroup").click(); //presionar el botn de cerrado si se cumpleta el response
+    
+            // console.log(res);
+        });
+    }
+    
+});
+
+
+
+
+
+
+
+//editar categoria o hijo
+
+document.getElementById("contentCategory").addEventListener("click", (e) => {
+  
+    let form = document.getElementById("formCategory");
+    let form2 = document.getElementById("formCategoryUpdate");
+    form.style.display = "none";
+    form2.style.display = "block";
+    let btnEdit = e.target.parentNode;
+    let btnClick = e.target;
+    console.log(btnEdit);
+    if (btnClick.value === undefined) {
+        btnClick = e.target.parentNode;
+    }
+
+    // console.log(btnClick)
+    if (btnEdit.id === "editCat") {
+        axios
+            .get(`/api/categorias/${btnEdit.value}/edit`)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+                
+                let inputCategoryId=document.getElementById('categoryId');
+                let inputName = document.getElementById("nameCategoryUpdate");
+
+                inputCategoryId.value=response.data.id;
+                inputName.value = response.data.name;
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }
+
+    if (btnClick.id === "editCat") {
+        axios
+            .get(`/api/categorias/${btnClick.value}/edit`)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+                let inputCategoryId=document.getElementById('categoryIdUpdate');
+                let inputName = document.getElementById("nameCategoryUpdate");
+
+                inputCategoryId.value=response.data.id;
+                inputName.value = response.data.name;
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }
+});
+
+
+//update del hijo o categoria
+document.getElementById("formCategoryUpdate").addEventListener("submit", (e) => {
+    e.preventDefault();
+    let idGroup=document.getElementById('parent_category_id_update');
+    let idCat=document.getElementById('categoryIdUpdate');
+    let nameCat = document.getElementById("nameCategoryUpdate");
+    let validador=document.getElementById('errorNameCategoryUpdate');
     if(nameCat.value===""){
-        document.getElementById('errorGroupUpdate').innerText="*Camporequerido"
+        validador.innerText="*Camporequerido*"
     }else{
         axios({
             method: "put",
@@ -345,14 +497,15 @@ document.getElementById("groupFormUpdate").addEventListener("submit", (e) => {
             data: {
                 
                 name: nameCat.value,
+                parent_category_id:idGroup.value,
             },
         }).then(function (res) {
             getAllDataGroup();
             getAllDataCategory();
             //cerramos modal;
-    
-            alertify.success("Grupo Actualizado");
-            document.getElementById("closeGroup").click(); //presionar el botn de cerrado si se cumpleta el response
+            validador.innerText=""
+            alertify.success("Categoria Actualizada :)");
+            document.getElementById("closeCategory").click(); //presionar el botn de cerrado si se cumpleta el response
     
             // console.log(res);
         });
