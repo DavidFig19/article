@@ -95,7 +95,7 @@ function simpleTemplating(data) {
         <td>${i.name}</td>
                     <td>
                     <span class="badge bg-info text-dark">
-                    ${i.namechild}
+                    ${i.nameParent}
                     </span>
                     </td>
                     <td>
@@ -125,7 +125,7 @@ function getAllDataCategory() {
                 //se mapea ese para acceder a las propiedades del hijo y solo
                 //asignamos el nombre del padre
                 item.children_category.forEach((i) => {
-                    ar_empty.push({ ...i, namechild: item.name }); //cremaos un nuevo array de objetetos pasando los antiguos elementos mas el nombre
+                    ar_empty.push({ ...i, nameParent: item.name }); //cremaos un nuevo array de objetetos pasando los antiguos elementos mas el nombre
                     return item;
                 });
             });
