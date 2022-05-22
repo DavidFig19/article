@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -15,8 +16,11 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        return view('admin.categories.index');
     }
 
+
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -25,6 +29,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -35,7 +40,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
     }
 
     /**

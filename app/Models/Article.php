@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-
+    protected $fillable=['name','description','author','image','category_id'];
+   
     //relacion uno a muchos inversa articles y usuarios (inverso)
     public function user(){
         return $this->belongsTo('App\Models\User');
