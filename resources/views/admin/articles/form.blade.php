@@ -1,43 +1,37 @@
-
-  
-  
-
 @if(count($errors)>0)
 
 
- @foreach($errors->all() as $error)
- 
- <ul>
-     <li class="text__danger"> {{$error}}</li>
- </ul>
+@foreach($errors->all() as $error)
+
+<ul>
+    <li class="text__danger"> {{$error}}</li>
+</ul>
 
 
 @endforeach
- 
+
 
 
 
 @endif
 
 
-<input type="text" class="form-input" placeholder="ID del articulo" id="idArticle" value="{{isset($article->id)?$article->id:old('id')}}"  disabled>
+<input type="text" class="form-input" placeholder="ID del articulo" id="idArticle" value="{{isset($article->id)?$article->id:old('id')}}" disabled>
 <div class="input-inline">
     <label for="">Titulo:
-        <input type="text" class="form-input" placeholder="Titulo del articulo" id="nameArticle"
-         name="name" value="{{isset($article->name)?$article->name:old('name')}}">
-      
+        <input type="text" class="form-input" placeholder="Titulo del articulo" id="nameArticle" name="name" value="{{isset($article->name)?$article->name:old('name')}}">
+
     </label>
 
     <label for="idcategory">Categoria:
         <select name="category_id" id="idCategory" class="form-input">
-         
+
         </select>
     </label>
 </div>
 
 <label for="">Autor:</label>
-<input type="text" class="form-input" placeholder="Autor del articulo" id="authorArticle"
- name="author" value="{{isset($article->author)?$article->author:old('author')}}">
+<input type="text" class="form-input" placeholder="Autor del articulo" id="authorArticle" name="author" value="{{isset($article->author)?$article->author:old('author')}}">
 
 
 <label for="">Descripción:</label>
@@ -55,15 +49,11 @@
     <input id="imgFile" name="image" type="file" accept="image/png,image/jpeg" hidden>
 </label>
 
-<br/>
+<br />
 
 
 
-    <button class="{{$btnmode}}" type="submit" id="saveArticle">
+<button class="{{$btnmode}}" type="submit" id="saveArticle">
     {{ $modo }}
-       Articulo
-    </button>
-  
-
-
-
+    Articulo
+</button>

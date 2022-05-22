@@ -41,8 +41,9 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/', [PageController::class, 'index'])->name('site.home');
 
-Route::get('noticia/{id}', [PageController::class, 'details'])->name('site.details');
+// Route::get('/noticia/{id}', [PageController::class, 'edit'])->name('site.details');
 
+Route::get('noticia/{id}', [PageController::class, 'details'])->name('site.details');
 
 
 
@@ -75,6 +76,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  */
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

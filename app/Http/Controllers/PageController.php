@@ -14,4 +14,12 @@ class PageController extends Controller
 
     }
 
+    public function details($id)
+    {
+
+        $article = Article::findOrFail($id);
+        return view('site.edit', compact('article'));
+    }
+
+
 }
